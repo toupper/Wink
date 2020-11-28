@@ -3,7 +3,8 @@
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/Swift-5.2-orange.svg" />
+    <img src="https://img.shields.io/badge/Swift-5.3-orange.svg" />
+    <img src="https://img.shields.io/badge/package%20manager-compatible-brightgreen.svg" />
     <a href="http://makeapullrequest.com">
         <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome" />
     </a>
