@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="winkr.png" width="650 max-width="90%" alt="Wink" />
+    <img src="wink.png" width="650 max-width="90%" alt="Wink" />
 </p>
 
 <p align="center">
