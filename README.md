@@ -53,7 +53,7 @@ dependencies: [
 ###  Detecting Face Expressions
 
 Wink performs the user face expressions detection within the ```FacialExpressionDetectorViewController``` class. This view controller will contain the camera view that analyzes the user face searching for their
-expressions. Therefore, if you want to start detecting expressions, you have to add this view controller to your hyerarchy, for instance through view controller containment, that is, adding it as a child:
+expressions. Therefore, if you want to start detecting expressions, you have to add this view controller to your view hierarchy, for instance through view controller containment, that is, adding it as a child:
 
 ```swift
 import Wink
