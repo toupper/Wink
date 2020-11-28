@@ -21,17 +21,22 @@ public class FacialExpressionDetectorViewController: UIViewController, ARSCNView
   public override func viewDidLoad() {
     super.viewDidLoad()
 
-    sceneView = ARSCNView()
+    checkFaceTrackingSupport()
 
+    sceneView = ARSCNView()
     self.view.addSubview(sceneView)
 
-      guard ARFaceTrackingConfiguration.isSupported else {
-          fatalError("Face tracking not available on this on this device model!")
-      }
+    adjustSceneViewConstraints()
 
-      sceneView.delegate = self
-      sceneView.showsStatistics = true
+    sceneView.delegate = self
+    sceneView.showsStatistics = true
+  }
+
+  private func checkFaceTrackingSupport() {
+    guard ARFaceTrackingConfiguration.isSupported else {
+      fatalError("Error: This device model does not support face tracking")
     }
+  }
 
   private func adjustSceneViewConstraints() {
     sceneView.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +50,7 @@ public class FacialExpressionDetectorViewController: UIViewController, ARSCNView
     super.viewWillAppear(animated)
 
     let configuration = ARFaceTrackingConfiguration()
-      sceneView.session.run(configuration)
+    sceneView.session.run(configuration)
   }
 
   public override func viewWillDisappear(_ animated: Bool) {
