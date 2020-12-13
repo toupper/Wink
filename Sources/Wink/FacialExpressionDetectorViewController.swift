@@ -10,12 +10,16 @@ import UIKit
 import ARKit
 import Combine
 
-public class FacialExpressionDetectorViewController: UIViewController, ARSCNViewDelegate {
+public class FacialExpressionDetectorViewController: UIViewController {
   var sceneView: ARSCNView!
 
+  /// Array of `FacialExpressionAnalyzer` responsible of detecting the new expressions
   public var analyzers = DefaultFacialExpressionAnalyzersProvider().defaultFacialExpressionAnalyzers()
-
+  /// When enabled, debug elements are shown in the camera view such as node lines and statistics. Default is `false`
+  public var debugMode = false
+  /// This publisher is updated with a new array of `FacialExpression` each time they are retrived
   lazy public var facialExpressionPublisher: AnyPublisher<[FacialExpression], Never> = facialExpressionSubject.eraseToAnyPublisher()
+  
   private let facialExpressionSubject: PassthroughSubject<[FacialExpression], Never> = PassthroughSubject<[FacialExpression], Never>()
 
   public override func viewDidLoad() {
@@ -29,7 +33,10 @@ public class FacialExpressionDetectorViewController: UIViewController, ARSCNView
     adjustSceneViewConstraints()
 
     sceneView.delegate = self
-    sceneView.showsStatistics = true
+
+    if debugMode {
+      sceneView.showsStatistics = true
+    }
   }
 
   private func checkFaceTrackingSupport() {
@@ -59,19 +66,7 @@ public class FacialExpressionDetectorViewController: UIViewController, ARSCNView
     sceneView.session.pause()
   }
 
-  public func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let faceMesh = ARSCNFaceGeometry(device: sceneView.device!)
-        let node = SCNNode(geometry: faceMesh)
-        node.geometry?.firstMaterial?.fillMode = .lines
-        return node
-    }
 
-  public func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-    if let faceAnchor = anchor as? ARFaceAnchor, let faceGeometry = node.geometry as? ARSCNFaceGeometry {
-      faceGeometry.update(from: faceAnchor.geometry)
-      detectFacialExpression(from: faceAnchor)
-    }
-  }
 
   func detectFacialExpression(from anchor: ARFaceAnchor) {
     let facialExpressions: [FacialExpression] = analyzers.compactMap {
@@ -81,5 +76,26 @@ public class FacialExpressionDetectorViewController: UIViewController, ARSCNView
     }
 
     facialExpressionSubject.send(facialExpressions)
+  }
+}
+
+extension FacialExpressionDetectorViewController: ARSCNViewDelegate {
+  public func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+    let faceMesh = ARSCNFaceGeometry(device: sceneView.device!)
+    let node = SCNNode(geometry: faceMesh)
+
+    if debugMode {
+      node.geometry?.firstMaterial?.fillMode = .lines
+
+    }
+
+    return node
+  }
+
+  public func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+    if let faceAnchor = anchor as? ARFaceAnchor, let faceGeometry = node.geometry as? ARSCNFaceGeometry {
+      faceGeometry.update(from: faceAnchor.geometry)
+      detectFacialExpression(from: faceAnchor)
+    }
   }
 }

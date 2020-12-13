@@ -59,6 +59,16 @@ class ViewController: UIViewController {
     facialExpressionDetectorViewController.didMove(toParent: self)
   }
 
+  private func changeFacialExpressionMinimumValidCoefficient() {
+    let changingAnalyzer = FacialExpressionAnalyzer(facialExpression: FacialExpression.mouthSmileLeft, blendShapeLocation: .mouthSmileLeft, minimumValidCoefficient: 0.2)
+
+    guard let index = facialExpressionDetectorViewController.analyzers.firstIndex(where: { $0.facialExpression == FacialExpression.mouthSmileLeft }) else {
+      return
+    }
+
+    facialExpressionDetectorViewController.analyzers[index] = changingAnalyzer
+  }
+
   private func addMoreFacialExpressionsToBeDetected() {
     facialExpressionDetectorViewController.analyzers.append(FacialExpressionAnalyzer(facialExpression: FacialExpression.eyeWideLeft, blendShapeLocation: .eyeWideLeft, minimumValidCoefficient: 0.6))
   }

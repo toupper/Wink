@@ -31,8 +31,8 @@ extension FacialExpression {
   static let test = FacialExpression(rawValue: "")
 }
 
-public struct FacialExpressionAnalyzer {
-  let facialExpression: FacialExpression
+public struct FacialExpressionAnalyzer: Equatable {
+  public let facialExpression: FacialExpression
   let blendShapeLocation: ARFaceAnchor.BlendShapeLocation
   let minimumValidCoefficient: Decimal
 
