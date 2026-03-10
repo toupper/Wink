@@ -27,10 +27,6 @@ public struct FacialExpression: RawRepresentable, Equatable {
   public static let jawOpen =  FacialExpression(rawValue: "jawOpen")
 }
 
-extension FacialExpression {
-  static let test = FacialExpression(rawValue: "")
-}
-
 public struct FacialExpressionAnalyzer: Equatable {
   public let facialExpression: FacialExpression
   let blendShapeLocation: ARFaceAnchor.BlendShapeLocation
