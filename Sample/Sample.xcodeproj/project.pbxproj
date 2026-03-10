@@ -123,6 +123,9 @@
 				Base,
 			);
 			mainGroup = 37891B222562A276003736E3;
+			packageReferences = (
+				37891B542562AB7C003736E3 /* XCLocalSwiftPackageReference ".." */,
+			);
 			productRefGroup = 37891B2C2562A276003736E3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -308,7 +311,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.casaseca.arkit-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -327,7 +330,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.axelspringer.arkit-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -355,9 +358,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		37891B542562AB7C003736E3 /* XCLocalSwiftPackageReference ".." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		37891B522562AB7C003736E3 /* Wink */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 37891B542562AB7C003736E3 /* XCLocalSwiftPackageReference ".." */;
 			productName = Wink;
 		};
 /* End XCSwiftPackageProductDependency section */
